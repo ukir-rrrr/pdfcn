@@ -88,7 +88,6 @@ export const QuoteEstimateContent = ({
       borderLeftColor: accent,
       borderLeftStyle: "solid",
       borderLeftWidth: 3,
-      marginTop: theme.spacing.sectionGap,
       paddingHorizontal: 12,
       paddingVertical: 8,
     },
@@ -106,7 +105,7 @@ export const QuoteEstimateContent = ({
       borderBottomWidth: 2,
       flexDirection: "row",
       justifyContent: "space-between",
-      marginBottom: theme.spacing.sectionGap,
+      marginBottom: 20,
       paddingBottom: theme.spacing.componentGap,
     },
     logo: {
@@ -125,6 +124,9 @@ export const QuoteEstimateContent = ({
     quoteInfo: {
       alignItems: "flex-end",
     },
+    section: {
+      marginBottom: 16,
+    },
     sectionLabel: {
       borderBottomColor: theme.colors.border,
       borderBottomStyle: "solid",
@@ -137,8 +139,11 @@ export const QuoteEstimateContent = ({
       paddingBottom: 4,
       textTransform: "uppercase",
     },
+    signature: {
+      marginTop: 20,
+    },
     titleBlock: {
-      marginBottom: theme.spacing.sectionGap,
+      marginBottom: 16,
     },
     totalsBox: {
       width: 240,
@@ -146,7 +151,7 @@ export const QuoteEstimateContent = ({
     totalsRow: {
       flexDirection: "row",
       justifyContent: "flex-end",
-      marginTop: 12,
+      marginTop: 8,
     },
   });
 
@@ -197,18 +202,18 @@ export const QuoteEstimateContent = ({
           </Text>
         </View>
 
-        <Section noWrap>
+        <Section noWrap spacing="none" style={styles.section}>
           <Text style={styles.sectionLabel} noMargin>
             Scope of work
           </Text>
-          <PdfList items={data.scope.map((text) => ({ text }))} />
+          <PdfList gap="xs" items={data.scope.map((text) => ({ text }))} />
         </Section>
 
-        <Section noWrap>
+        <Section noWrap spacing="none" style={styles.section}>
           <Text style={styles.sectionLabel} noMargin>
             Pricing
           </Text>
-          <Table variant="line">
+          <Table variant="compact">
             <TableHeader>
               <TableRow header>
                 <TableCell>Phase</TableCell>
@@ -239,7 +244,11 @@ export const QuoteEstimateContent = ({
                   })),
                   {
                     key: "Estimated total",
-                    keyStyle: { fontSize: 13, fontWeight: "bold" },
+                    keyStyle: {
+                      color: theme.colors.foreground,
+                      fontSize: 13,
+                      fontWeight: "bold",
+                    },
                     value: formatMoney(total),
                     valueStyle: {
                       color: accent,
@@ -271,6 +280,7 @@ export const QuoteEstimateContent = ({
         </View>
 
         <PdfSignatureBlock
+          style={styles.signature}
           variant="double"
           signers={[
             { date: "Date:", label: "Contractor", name: data.companyName },
